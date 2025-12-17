@@ -15,6 +15,35 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		printUsage()
+		os.Exit(1)
+	}
+
+	switch os.Args[1] {
+	case "share":
+		shareCmd(os.Args[2:])
+	case "help", "-h", "--help":
+		printUsage()
+	default:
+		fmt.Fprintf(os.Stderr, "unknown command: %s\n", os.Args[1])
+		printUsage()
+		os.Exit(1)
+	}
+}
+
+func printUsage() {
+	fmt.Println("Usage: claude-coding <command> [options]")
+	fmt.Println()
+	fmt.Println("Commands:")
+	fmt.Println("  share    Export conversation thread to HTML")
+	fmt.Println()
+	fmt.Println("Run 'claude-coding <command> -h' for command-specific help")
+}
+
+func shareCmd(args []string) {
+	fs := flag.NewFlagSet("share", flag.ExitOnError)
+
 	var projectPath string
 	var outputPath string
 	var title string
@@ -22,13 +51,13 @@ func main() {
 	var sessionID string
 	var createGist bool
 
-	flag.StringVar(&projectPath, "project", "", "project path")
-	flag.StringVar(&outputPath, "output", "", "output file path")
-	flag.StringVar(&title, "title", "", "thread title")
-	flag.StringVar(&username, "username", "", "username to display")
-	flag.StringVar(&sessionID, "session", "", "specific session ID to export")
-	flag.BoolVar(&createGist, "gist", false, "create GitHub gist and return preview URL")
-	flag.Parse()
+	fs.StringVar(&projectPath, "project", "", "project path")
+	fs.StringVar(&outputPath, "output", "", "output file path")
+	fs.StringVar(&title, "title", "", "thread title")
+	fs.StringVar(&username, "username", "", "username to display")
+	fs.StringVar(&sessionID, "session", "", "specific session ID to export")
+	fs.BoolVar(&createGist, "gist", false, "create GitHub gist and return preview URL")
+	fs.Parse(args)
 
 	if projectPath == "" {
 		cwd, err := os.Getwd()

@@ -22,13 +22,13 @@ A Claude Code plugin that exports conversation threads to shareable HTML files.
 
 ```bash
 # 1. Install the CLI binary
-go install github.com/priyanshujain/claude-coding/cmd/claude-share@latest
+go install github.com/priyanshujain/claude-coding/cmd/claude-coding@latest
 
 # 2. Add the marketplace from GitHub
 /plugin marketplace add priyanshujain/claude-coding
 
 # 3. Install the plugin
-/plugin install claude-share@priyanshujain
+/plugin install claude-coding@priyanshujain
 ```
 
 ### Build from Source
@@ -39,12 +39,12 @@ git clone https://github.com/priyanshujain/claude-coding.git
 cd claude-coding
 
 # Build and install
-make build
-sudo make install
+go install ./cmd/claude-coding
 
 # Then install the plugin (inside Claude Code)
-/plugin marketplace add priyanshujain/claude-coding
-/plugin install claude-share@priyanshujain
+claude
+/plugin marketplace add ./
+/plugin install claude-coding@priyanshujain
 ```
 
 ## Usage
@@ -53,19 +53,22 @@ sudo make install
 
 ```bash
 # Export current directory's most recent session
-claude-share
+claude-coding share
 
 # Export specific project
-claude-share --project /path/to/project
+claude-coding share --project /path/to/project
 
 # Export specific session by ID
-claude-share --session "abc123-session-id"
+claude-coding share --session "abc123-session-id"
 
 # Custom output path
-claude-share --output my-thread.html
+claude-coding share --output my-thread.html
 
 # Custom title and username
-claude-share --title "My Thread" --username "John Doe"
+claude-coding share --title "My Thread" --username "John Doe"
+
+# Create a GitHub Gist
+claude-coding share --gist
 ```
 
 ### Slash Command
@@ -138,15 +141,15 @@ This ensures reliable exports even with concurrent sessions in the same project.
 
 ```
 claude-coding/
+├── marketplace.json         # Plugin marketplace for installation
 ├── .claude-plugin/
 │   ├── plugin.json          # Plugin manifest
-│   ├── marketplace.json     # Plugin marketplace for installation
 │   └── scripts/
 │       └── capture-session.sh  # SessionStart hook to capture session ID
 ├── commands/
 │   └── share.md             # /share slash command
 ├── cmd/
-│   └── claude-share/
+│   └── claude-coding/
 │       └── main.go          # CLI entry point
 ├── internal/
 │   ├── parser/
@@ -156,7 +159,6 @@ claude-coding/
 │   └── template/
 │       └── template.go      # HTML template
 ├── go.mod
-├── Makefile
 └── README.md
 ```
 
@@ -178,17 +180,11 @@ The generated HTML includes:
 ## Development
 
 ```bash
-# Build
-make build
-
-# Install locally
-make install
-
-# Clean build artifacts
-make clean
+# Build and install
+go install ./cmd/claude-coding
 
 # Test
-./bin/claude-share --project "$PWD" --output test.html
+claude-coding share --project "$PWD" --output test.html
 open test.html
 ```
 

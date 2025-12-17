@@ -8,9 +8,9 @@
   },
   "plugins": [
     {
-      "name": "claude-share",
+      "name": "claude-coding",
       "source": "./",
-      "description": "Share Claude Code threads as HTML",
+      "description": "Claude Code plugins by Priyanshu Jain",
       "version": "1.0.0",
       "license": "MIT",
       "keywords": ["share", "export", "html", "thread"]

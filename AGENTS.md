@@ -5,15 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build Commands
 
 ```bash
-make build          # Build to bin/claude-share
-make install        # Build and install to /usr/local/bin (requires sudo)
-make clean          # Remove build artifacts
+go install ./cmd/claude-coding
 ```
 
 ## Testing
 
 ```bash
-./bin/claude-share --project "$PWD" --output test.html
+claude-coding share --project "$PWD" --output test.html
 open test.html
 ```
 
