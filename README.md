@@ -53,6 +53,9 @@ claude-share
 # Export specific project
 claude-share --project /path/to/project
 
+# Export specific session by ID
+claude-share --session "abc123-session-id"
+
 # Custom output path
 claude-share --output my-thread.html
 
@@ -109,18 +112,32 @@ Content blocks can be:
 ### HTML Generation
 
 The tool:
-1. Finds the most recent `.jsonl` file in the project's Claude data folder
+1. Finds the session file (by ID if provided, or most recent)
 2. Parses messages and filters out `file-history-snapshot` entries
 3. Merges tool results with their preceding tool calls
 4. Converts markdown to HTML (headers, bold, code, lists, links)
 5. Generates a self-contained HTML file with inline CSS
+
+### Multi-Session Support
+
+When multiple Claude Code sessions are running in parallel, the plugin uses a `SessionStart` hook to track which session invoked the `/share` command:
+
+1. When a session starts, the hook captures the `session_id` from Claude Code
+2. The session ID is persisted to `CLAUDE_ENV_FILE` (session-specific)
+3. When `/share` runs, it passes `$CLAUDE_SESSION_ID` to the CLI
+4. The CLI exports the correct session, not just the most recently modified one
+
+This ensures reliable exports even with concurrent sessions in the same project.
 
 ## Project Structure
 
 ```
 claude-coding/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
+│   ├── plugin.json          # Plugin manifest
+│   ├── marketplace.json     # Plugin marketplace for installation
+│   └── scripts/
+│       └── capture-session.sh  # SessionStart hook to capture session ID
 ├── commands/
 │   └── share.md             # /share slash command
 ├── cmd/
