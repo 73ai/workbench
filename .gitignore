@@ -36,5 +36,7 @@ bin
 TODO.md
 
 claude-coding
+session_start
+session_end
 
 plan.md
