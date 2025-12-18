@@ -372,9 +372,16 @@ func syncSessionGist(projectPath string, m *metadata.Metadata, sessionID, adjace
 	if existingGistID != "" {
 		_, err = gist.Update(existingGistID, filename, html)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "warning: failed to update %s session gist: %v\n", direction, err)
+			gistID, _, err = gist.Create(filename, html)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "warning: failed to create %s session gist: %v\n", direction, err)
+				return
+			}
+			m.SetGistID(sessionID, gistID)
+			metadata.SaveMetadata(projectPath, m)
+		} else {
+			gistID = existingGistID
 		}
-		gistID = existingGistID
 	} else {
 		gistID, _, err = gist.Create(filename, html)
 		if err != nil {
