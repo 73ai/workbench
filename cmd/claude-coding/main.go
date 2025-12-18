@@ -204,6 +204,9 @@ func extractTitle(messages []parser.Message) string {
 			for _, block := range msg.Blocks {
 				if block.Type == "text" && block.Content != "" {
 					title := strings.TrimSpace(block.Content)
+					if strings.HasPrefix(title, "Caveat:") || strings.HasPrefix(title, "<") {
+						continue
+					}
 					if len(title) > 80 {
 						title = title[:77] + "..."
 					}
