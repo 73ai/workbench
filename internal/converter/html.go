@@ -181,13 +181,13 @@ func renderBlock(block parser.ContentBlock) string {
 		if content == "[Request interrupted by user for tool use]" {
 			return ""
 		}
+		if strings.Contains(content, "<thinking>") {
+			return renderTextWithThinking(content)
+		}
 		return `<div class="text-block">` + formatText(block.Content) + `</div>`
 
 	case "thinking":
-		return `<div class="collapsible">
-<div class="collapsible-header"><span class="chevron">▶</span> Thinking</div>
-<div class="collapsible-content">` + html.EscapeString(block.Content) + `</div>
-</div>`
+		return renderThinkingBlock(block.Content)
 
 	case "tool_use":
 		return renderToolUse(block.Content)
@@ -213,6 +213,46 @@ func renderBlock(block parser.ContentBlock) string {
 	}
 
 	return ""
+}
+
+func renderThinkingBlock(content string) string {
+	return `<div class="collapsible">
+<div class="collapsible-header"><span class="chevron">▶</span> Thinking</div>
+<div class="collapsible-content">` + html.EscapeString(content) + `</div>
+</div>`
+}
+
+var textThinkingRe = regexp.MustCompile(`(?s)<thinking>\s*(.*?)\s*</thinking>`)
+
+func renderTextWithThinking(content string) string {
+	matches := textThinkingRe.FindAllStringSubmatchIndex(content, -1)
+	if len(matches) == 0 {
+		return `<div class="text-block">` + formatText(content) + `</div>`
+	}
+
+	var result strings.Builder
+	lastEnd := 0
+
+	for _, match := range matches {
+		before := strings.TrimSpace(content[lastEnd:match[0]])
+		if before != "" {
+			result.WriteString(`<div class="text-block">` + formatText(before) + `</div>`)
+		}
+
+		thinking := strings.TrimSpace(content[match[2]:match[3]])
+		if thinking != "" {
+			result.WriteString(renderThinkingBlock(thinking))
+		}
+
+		lastEnd = match[1]
+	}
+
+	after := strings.TrimSpace(content[lastEnd:])
+	if after != "" {
+		result.WriteString(`<div class="text-block">` + formatText(after) + `</div>`)
+	}
+
+	return result.String()
 }
 
 func renderBashCombined(cmd, stdout, stderr string) string {
