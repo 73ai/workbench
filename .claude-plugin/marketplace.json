@@ -11,7 +11,7 @@
       "name": "workbench",
       "source": "./",
       "description": "Claude Code plugins by Priyanshu Jain",
-      "version": "0.0.6",
+      "version": "0.0.7",
       "license": "MIT",
       "keywords": [
         "share",
