@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/priyanshujain/claude-coding/generic/metadata"
+	"github.com/73ai/workbench/generic/metadata"
 )
 
 type HookInput struct {
