@@ -28,16 +28,16 @@ https://github.com/user-attachments/assets/cf3db6b9-964a-4a31-8f13-3c1f32238f11
 ### Install as Claude Code Plugin
 ```bash
 # 1. Install the CLI binary
-go install github.com/priyanshujain/claude-coding/cmd/claude-coding@latest
+go install github.com/73ai/workbench/cmd/workbench@latest
 
 # 2. Start Claude Code
 claude
 
 # 3. Add the marketplace from GitHub
-/plugin marketplace add priyanshujain/claude-coding
+/plugin marketplace add 73ai/workbench
 
 # 4. Install the plugin
-/plugin install claude-coding@priyanshujain
+/plugin install workbench@73ai
 ```
 
 NOTE: Enable auto-updates for the plugin when adding marketplace and installing plugin to get the latest features and fixes.
@@ -49,7 +49,7 @@ NOTE: Enable auto-updates for the plugin when adding marketplace and installing 
 After installing the plugin, use the `/share` command in Claude Code:
 
 ```
-/claude-coding:share
+/workbench:share
 ```
 
 This creates a GitHub Gist and returns a shareable preview link.

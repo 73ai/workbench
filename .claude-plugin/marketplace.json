@@ -1,5 +1,5 @@
 {
-  "name": "priyanshujain",
+  "name": "73ai",
   "owner": {
     "name": "Priyanshu Jain"
   },
@@ -8,7 +8,7 @@
   },
   "plugins": [
     {
-      "name": "claude-coding",
+      "name": "workbench",
       "source": "./",
       "description": "Claude Code plugins by Priyanshu Jain",
       "version": "0.0.5",

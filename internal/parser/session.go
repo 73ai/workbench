@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/priyanshujain/claude-coding/generic/metadata"
+	"github.com/73ai/workbench/generic/metadata"
 )
 
 func FindLatestSessionID(projectPath string) (string, error) {

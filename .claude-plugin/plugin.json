@@ -1,11 +1,11 @@
 {
-  "name": "claude-coding",
+  "name": "workbench",
   "description": "Share Claude Code threads as HTML",
   "version": "0.0.5",
   "author": {
     "name": "Priyanshu Jain"
   },
-  "repository": "https://github.com/priyanshujain/claude-coding",
+  "repository": "https://github.com/73ai/workbench",
   "license": "MIT",
   "keywords": [
     "share",

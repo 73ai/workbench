@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/priyanshujain/claude-coding/internal/converter"
-	"github.com/priyanshujain/claude-coding/internal/gist"
-	"github.com/priyanshujain/claude-coding/generic/metadata"
-	"github.com/priyanshujain/claude-coding/internal/parser"
+	"github.com/73ai/workbench/generic/metadata"
+	"github.com/73ai/workbench/internal/converter"
+	"github.com/73ai/workbench/internal/gist"
+	"github.com/73ai/workbench/internal/parser"
 )
 
 func main() {
@@ -34,12 +34,12 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Println("Usage: claude-coding <command> [options]")
+	fmt.Println("Usage: workbench <command> [options]")
 	fmt.Println()
 	fmt.Println("Commands:")
 	fmt.Println("  share    Export conversation thread to HTML")
 	fmt.Println()
-	fmt.Println("Run 'claude-coding <command> -h' for command-specific help")
+	fmt.Println("Run 'workbench <command> -h' for command-specific help")
 }
 
 func shareCmd(args []string) {

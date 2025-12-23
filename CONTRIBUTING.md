@@ -14,30 +14,30 @@ Thank you for your interest in contributing! This document covers development se
 
 ```bash
 # Clone the repository
-git clone https://github.com/priyanshujain/claude-coding.git
-cd claude-coding
+git clone https://github.com/73ai/workbench.git
+cd workbench
 
 # Build and install
-go install ./cmd/claude-coding
+go install ./cmd/workbench
 
 # Install the plugin in Claude Code
 claude
 /plugin marketplace add ./
-/plugin install claude-coding@priyanshujain
+/plugin install workbench@73ai
 ```
 
 ### Testing
 
 ```bash
 # Build the binary
-go install ./cmd/claude-coding
+go install ./cmd/workbench
 
 # Test HTML export
-claude-coding share --project "$PWD" --output test.html
+workbench share --project "$PWD" --output test.html
 open test.html
 
 # Test gist creation
-claude-coding share --project "$PWD" --gist
+workbench share --project "$PWD" --gist
 ```
 
 ## Architecture
@@ -45,8 +45,8 @@ claude-coding share --project "$PWD" --gist
 ### Project Structure
 
 ```
-claude-coding/
-├── cmd/claude-coding/       # CLI entry point
+workbench/
+├── cmd/workbench/       # CLI entry point
 │   └── main.go
 ├── internal/
 │   ├── parser/              # JSONL session parsing
@@ -158,7 +158,7 @@ You can read more about how claude code stores threads [here](https://kentgigger
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test locally with `go install ./cmd/claude-coding`
+4. Test locally with `go install ./cmd/workbench`
 5. Submit a pull request
 
 ## License

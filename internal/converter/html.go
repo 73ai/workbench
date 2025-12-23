@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/priyanshujain/claude-coding/internal/parser"
-	"github.com/priyanshujain/claude-coding/internal/template"
+	"github.com/73ai/workbench/internal/parser"
+	"github.com/73ai/workbench/internal/template"
 )
 
 type Config struct {

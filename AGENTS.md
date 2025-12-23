@@ -5,13 +5,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build Commands
 
 ```bash
-go install ./cmd/claude-coding
+go install ./cmd/workbench
 ```
 
 ## Testing
 
 ```bash
-claude-coding share --project "$PWD" --output test.html
+workbench share --project "$PWD" --output test.html
 open test.html
 ```
 
