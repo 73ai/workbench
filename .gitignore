@@ -35,8 +35,8 @@ bin
 
 TODO.md
 
-workbench
-session_start
-session_end
+/workbench
+/session_start
+/session_end
 
 plan.md
