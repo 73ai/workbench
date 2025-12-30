@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "go run ${CLAUDE_PLUGIN_ROOT}/scripts/session_end/main.go"
+            "command": "cd ${CLAUDE_PLUGIN_ROOT} && go run ./scripts/session_end/main.go"
           }
         ]
       }
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "go run ${CLAUDE_PLUGIN_ROOT}/scripts/session_start/main.go"
+            "command": "cd ${CLAUDE_PLUGIN_ROOT} && go run ./scripts/session_start/main.go"
           }
         ]
       }
